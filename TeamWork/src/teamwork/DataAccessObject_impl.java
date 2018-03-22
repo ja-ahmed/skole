@@ -28,12 +28,12 @@ public class DataAccessObject_impl {
             while (rs.next()) {
 
                 int _user_id = rs.getInt("user_id");
-                String _user = rs.getString("username");
+                String _user1 = rs.getString("username");
                 String _pass = rs.getString("password");
                 boolean _admin = rs.getBoolean("admin");
 
                 // _admin skal være boolean / enten admin true eller ikke admin false
-                User _newuser = new User(_user_id, _user, _pass, _admin);
+                User _newuser = new User(_user_id, _user1, _pass, _admin);
                 _teamMembers.add(_newuser);
             }
         } catch (Exception e) {
