@@ -42,8 +42,8 @@ public class DataAccessObject_impl {
     }
 
     public ArrayList<Team> getTeams() {
-        //ArrayList<Team> teamList = new ArrayList<>();
-           Team newTeam = new Team();
+        ArrayList<Team> teamList = new ArrayList<>();
+           
         try {
             String sql = "SELECT * FROM teamwork.team";
             Statement stmt = connector.getConnection().createStatement();
@@ -54,21 +54,23 @@ public class DataAccessObject_impl {
                 int _id = rs.getInt("team_id");
                 String _name = rs.getString("teamname");
                 
-                
+                 Team newTeam = new Team();
                  newTeam.setId(_id);
                  newTeam.setName(_name);
                  
-                newTeam.addMembers(newTeam);
+                 newTeam.setMembers(getTeamMembers(_id));
+               
+                 teamList.add(newTeam);
             }
             
             
         } catch (Exception e) {
         }
-        return newTeam.getMembers();
+        return teamList;
     }
 
     public Team getTeam(int id) {
-         Team _team = new Team();
+         
         try { 
             String sql = "SELECT * FROM teamwork.team where team_id =" + id;
             Statement stmt = connector.getConnection().createStatement();
@@ -76,18 +78,21 @@ public class DataAccessObject_impl {
             
                     
             while (rs.next()) {                
-                
+                Team _team = new Team();
                 int _id = rs.getInt("team_id");
                 String _name = rs.getString("teamname");
                 
                 _team.setId(_id);
                 _team.setName(_name);
+                _team.setMembers(getTeamMembers(_id));
+                return _team;
             }
             
             
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return _team;
+        return null;
     }
 
     public Team getTeam(String teamname) {
