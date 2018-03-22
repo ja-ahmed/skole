@@ -6,7 +6,7 @@ public class Team {
     
     private int id;
     private String name;
-    private ArrayList<User> members;
+    private ArrayList<Team> members;
 
     public int getId() {
         return id;
@@ -24,12 +24,12 @@ public class Team {
         this.name = name;
     }
 
-    public ArrayList<User> getMembers() {
+    public ArrayList<Team> getMembers() {
         return members;
     }
 
-    public void addMembers(User user) {
-        this.members.add(user);
+    public void addMembers(Team team) {
+        this.members.add(team);
     }
     
     

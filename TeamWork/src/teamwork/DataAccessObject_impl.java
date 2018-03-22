@@ -42,29 +42,29 @@ public class DataAccessObject_impl {
     }
 
     public ArrayList<Team> getTeams() {
-        ArrayList<Team> teamList = new ArrayList<>();
+        //ArrayList<Team> teamList = new ArrayList<>();
+           Team newTeam = new Team();
         try {
             String sql = "SELECT * FROM teamwork.team";
             Statement stmt = connector.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            
+         
             while (rs.next()) {                
                 
                 int _id = rs.getInt("team_id");
                 String _name = rs.getString("teamname");
                 
-                 Team newTeam = new Team();
                 
                  newTeam.setId(_id);
                  newTeam.setName(_name);
-                
-                 teamList.add(newTeam);
+                 
+                newTeam.addMembers(newTeam);
             }
             
             
         } catch (Exception e) {
         }
-        return teamList;
+        return newTeam.getMembers();
     }
 
     public Team getTeam(int id) {

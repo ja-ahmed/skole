@@ -18,9 +18,8 @@ public class NewMain {
      */
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
-       User user = dao.getUser("Fedtmule");
-        
-       System.out.println(user.getId());
+         Team team = dao.getTeam(1);
+         System.out.println(team.getName());
     }
     
 }
