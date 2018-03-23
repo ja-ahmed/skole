@@ -1,7 +1,6 @@
 package teamwork;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -96,28 +95,30 @@ public class DataAccessObject_impl {
     }
 
     public Team getTeam(String teamname) {
-        Team _team = new Team();
-        try {
-            String sql = "SELECT * FROM teamwork.team where teamname =" + teamname;
+        
+          
+        try { 
+            String sql = "SELECT * FROM teamwork.team where teamname =" + "'"+teamname+"'";
             Statement stmt = connector.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             
                     
             while (rs.next()) {                
-                
+                Team _team = new Team();
                 int _id = rs.getInt("team_id");
                 String _name = rs.getString("teamname");
                 
                 _team.setId(_id);
                 _team.setName(_name);
-                
-                
+                _team.setMembers(getTeamMembers(_id));
+                return _team;
             }
             
             
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return _team;
+        return null;
     }
 
     public ArrayList<User> getUsers() {
@@ -146,14 +147,16 @@ public class DataAccessObject_impl {
     }
 
     public User getUser(int id) {
-        User nUser = new User();
         try {
+            
+           
+            
             String sql = "SELECT * FROM user where user_id = " + id;
             Statement stmt = connector.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
            
             while (rs.next()) {
-
+                User nUser = new User();
                 int _user_id = rs.getInt("user_id");
                 String _user = rs.getString("username");
                 String _password = rs.getString("password");
@@ -163,24 +166,25 @@ public class DataAccessObject_impl {
                 nUser.setId(_user_id);
                 nUser.setAdmin(_admin);
                 // _admin skal være boolean / enten admin true eller ikke admin false
-                
+                return nUser;
             }
-          
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DataAccessObject_impl.class.getName()).log(Level.SEVERE, null, ex);
         }
-           return nUser;
+        return null;
     }
 
     public User getUser(String username) {
-         User nUser = new User();
-        try {
-            String sql = "SELECT * FROM teamwork.user where username = " + username;
+      try {
+            
+            
+            
+            String sql = "SELECT * FROM user where username = "+ "'"+username+"'";
             Statement stmt = connector.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(sql);
            
             while (rs.next()) {
-
+                User nUser = new User();
                 int _user_id = rs.getInt("user_id");
                 String _user = rs.getString("username");
                 String _password = rs.getString("password");
@@ -190,13 +194,12 @@ public class DataAccessObject_impl {
                 nUser.setId(_user_id);
                 nUser.setAdmin(_admin);
                 // _admin skal være boolean / enten admin true eller ikke admin false
-                
+                return nUser;
             }
-          
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DataAccessObject_impl.class.getName()).log(Level.SEVERE, null, ex);
         }
-           return nUser;
+        return null;
     }
 
 }

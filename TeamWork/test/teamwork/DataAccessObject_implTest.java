@@ -126,6 +126,7 @@ public class DataAccessObject_implTest {
         User user = dao.getUser("Fedtmule");
         assertEquals(3, user.getId());
         assertEquals("1234", user.getPassword());
+       
     }
 
 }
