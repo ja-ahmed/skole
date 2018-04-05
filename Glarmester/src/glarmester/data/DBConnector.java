@@ -10,9 +10,9 @@ public class DBConnector {
 	//Constants
 	private static final String IP	     = "localhost";
 	private static final String PORT     = "3306";
-	public  static final String DATABASE = "world";
-	private static final String USERNAME = "BigBoss"; 
-	private static final String PASSWORD = "1234";	     	
+	public  static final String DATABASE = "glarmester";
+	private static final String USERNAME = "root"; 
+	private static final String PASSWORD = "";	     	
 	
 	public DBConnector() throws Exception {
    		Class.forName("com.mysql.jdbc.Driver").newInstance();
